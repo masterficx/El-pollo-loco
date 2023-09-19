@@ -9,9 +9,15 @@ class World {
     clouds = [
         new Cloud(),
     ];
+
+    background = [
+
+        new BackgroundObject(),
+    ];
+
     canvas;
     ctx;
-    constructor(canvas){
+    constructor(canvas) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.draw();
@@ -26,10 +32,10 @@ class World {
         this.clouds.forEach(cloud => {
             this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height);
         });
-        
+
         // Draw() will be executed repeatedly.
         let self = this;
-        requestAnimationFrame(function(){
+        requestAnimationFrame(function () {
             self.draw();
         });
     }
