@@ -1,11 +1,16 @@
 class Cloud extends MovableObject {
+    y = 20;
+    width = 720;
+    height = 250;
+constructor(){
 
-    constructor(){
-
-        super().loadImage('Assets/img/5_background/layers/4_clouds/1.png')
-        this.x = Math.random() * 500;
-        this.y = 20;
-        this.width = 500;
-        this.height = 250;
+    super().loadImage('Assets/img/5_background/layers/4_clouds/1.png')
+    this.x = Math.random() * 500;
+    this.animate();
+}
+    animate() {
+        setInterval(() => {
+            this.x -= 0.15;
+        }, 1000 / 60);
     }
 }
