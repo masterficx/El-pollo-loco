@@ -1,4 +1,4 @@
-class Keyboard{
+class Keyboard {
     UP = false;
     DOWN = false;
     RIGHT = false;

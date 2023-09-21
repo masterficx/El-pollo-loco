@@ -1,6 +1,6 @@
 let canvas;
 let ctx;
-let Keyboard = new Keyboard();
+let keyboard = new Keyboard();
 
 function init(){
     canvas = document.getElementById('canvas');
@@ -11,38 +11,36 @@ function init(){
 }
 
 window.addEventListener('keydown', (e) => {
-    //console.log(e);
     if (e.keyCode == 32) {
-        Keyboard.SPACE = true;
+        keyboard.SPACE = true;
     }
     if (e.keyCode == 37) {
-        Keyboard.LEFT = true;
+        keyboard.LEFT = true;
     }
     if (e.keyCode == 38) {
-        Keyboard.UP = true;
+        keyboard.UP = true;
     }
     if (e.keyCode == 39) {
-        Keyboard.RIGHT = true;
+        keyboard.RIGHT = true;
     }
     if (e.keyCode == 40) {
-        Keyboard.DOWN = true;
+        keyboard.DOWN = true;
     }
 });
 window.addEventListener('keyup', (e) => {
-    //console.log(e);
     if (e.keyCode == 32) {
-        Keyboard.SPACE = false;
+        keyboard.SPACE = false;
     }
     if (e.keyCode == 37) {
-        Keyboard.LEFT = false;
+        keyboard.LEFT = false;
     }
     if (e.keyCode == 38) {
-        Keyboard.UP = false;
+        keyboard.UP = false;
     }
     if (e.keyCode == 39) {
-        Keyboard.RIGHT = false;
+        keyboard.RIGHT = false;
     }
     if (e.keyCode == 40) {
-        Keyboard.DOWN = false;
+        keyboard.DOWN = false;
     }
 });
