@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,25 +11,49 @@
     <script src="models/character.class.js"></script>
     <script src="models/chicken.class.js"></script>
     <script src="models/cloud.class.js"></script>
-    <script src="models/status-bar.class.js"></script>
+    <script src="models/health-status-bar.class.js"></script>
+    <script src="models/bottle-status-bar.class.js"></script>
+    <script src="models/coin-status-bar.class.js"></script>
     <script src="models/world.class.js"></script>
     <script src="models/background-object.class.js"></script>
     <script src="models/keyboard.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="models/throwable-object.class.js"></script>
-    <script src="models/endboss.class.js"></script> 
+    <script src="models/endboss.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="JS/game.js"></script>
-    
+
 </head>
+
 <body onload="init()">
 
     <h1>El pollo loco</h1>
-    
-    
-    <canvas id="canvas" width="720" height="480">
+
+    <div id="frame">
+        <div id="upper_frame">
+            <button onclick="toggleTouchControls()">
+                <img id="touch_img" src="Assets/img/icons/touch_enable.png">
+            </button>
+            <button onclick="toggleSoundControls()">
+                <img id="sound_img" src="Assets/img/icons/mute.png">
+            </button>
+        </div>
+        <canvas id="canvas" width="720" height="480"></canvas>
+        <div id="lower_frame" class="d-none">
+            <div id="lower_left">
+                <button id="left_btn"><img src="Assets/img/icons/left.png" alt=""></button>
+                <button id="right_btn"><img src="Assets/img/icons/right.png" alt=""></button>
+            </div>
+            <div id="lower_right">
+                <button id="jump_btn"><img src="Assets/img/icons/up.png" alt=""></button>
+                <button id="throw_btn"><img src="Assets/img/icons/bottle.png " alt=""></button>
+
+            </div>
+        </div>
+    </div>
 
 
     </canvas>
 </body>
+
 </html>
