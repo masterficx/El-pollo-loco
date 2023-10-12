@@ -10,10 +10,15 @@
     <script src="models/movable-object.class.js"></script>
     <script src="models/character.class.js"></script>
     <script src="models/chicken.class.js"></script>
+    <script src="models/small-chicken.class.js"></script>
+    <script src="models/bottle.class.js"></script>
+    <script src="models/coin.class.js"></script>
     <script src="models/cloud.class.js"></script>
     <script src="models/health-status-bar.class.js"></script>
     <script src="models/bottle-status-bar.class.js"></script>
     <script src="models/coin-status-bar.class.js"></script>
+    <script src="models/end-boss-bar-icon.class.js"></script>
+    <script src="models/end-boss-status-bar.class.js"></script>
     <script src="models/world.class.js"></script>
     <script src="models/background-object.class.js"></script>
     <script src="models/keyboard.class.js"></script>
@@ -21,32 +26,123 @@
     <script src="models/throwable-object.class.js"></script>
     <script src="models/endboss.class.js"></script>
     <script src="levels/level1.js"></script>
+    <script src="JS/screen-orientation.js"></script>
     <script src="JS/game.js"></script>
+    
 
 </head>
 
-<body onload="init()">
+<body onload="handleOrientation()">
+    <div class="d-none" id="rotate_device">
+        <p>Please rotate screen</p>
+        <img src="Assets/img/rotate_device.png">
+    </div>
+    <h1 id="title" class="">El pollo loco</h1>
 
-    <h1>El pollo loco</h1>
+    <div id="frame" class="">
+        <div class="d-none" id="how_to_play">
 
-    <div id="frame">
-        <div id="upper_frame">
-            <button onclick="toggleTouchControls()">
-                <img id="touch_img" src="Assets/img/icons/touch_enable.png">
+            <div id="how_to_movement">
+                <h2>How to play:</h2>
+                <div id="directions">
+                    <div id="directions_left">
+                        <p>Move left :</p>
+                        <p>Move right :</p>
+                        <p>Jump :</p>
+                        <p>Throw salsa :</p>
+                    </div>
+                    <div id="directions_right">
+                        <p>Left</p>
+                        <p> Right</p>
+                        <p> Space</p>
+                        <p> D key</p>
+                    </div>
+                </div>
+            </div>
+            <p id="how_to_description">Move to the right in the world, collecting bottles and coins.
+                In order to eliminate the chickens or the chicks, You can jump on them or throw salsa at them, but
+                the
+                endboss can only be eliminated by throwing salsa at it. You will need all bottles,
+                in order to eliminate the endboss.
+            </p>
+
+        </div>
+        <div class="d-none" id="story_div">
+            <p>Once upon a time in Mexico, lived a charismatic and adventurous young man named Pepe Peligroso.
+                One sunny afternoon, while Pepe was enjoying a delicious plate of enchiladas, the sky darkened,
+                and thunder rumbled as a massive shadow loomed over the desert. <br>
+
+                The shadow, outlined a monstrous fowl of enormous proportions called El Pollo Loco, hungry for
+                destruction .
+                It was the biggest chicken that Pepe had seen, and it had a legion of smaller chickens and adorable
+                chicks at its side,
+                all under its command. <br>
+
+                Realizing the dire situation, Pepe armed himself with a collection of enchanted salsa bottles,
+                embarking on an epic quest to defeat it. The enchanted salsa bottles had the power to unleash fiery
+                salsa attacks,
+                that could defeat El Pollo Loco and its chicken minions.<br>
+
+                Would Pepe Peligroso have the courage and the spice to defeat El Pollo Loco and restore peace to the
+                town?
+                Only time, courage, and a lot of salsa would tell.
+            </p>
+        </div>
+        <div class="d-none" id="quit_game_div">
+            <h2>Quit Game ?</h2>
+            <div id="quit_game_btns">
+                <button id="quit_game_btn" onclick="quitGame()">
+                    <img src="Assets/img/icons/checked_checkbox.png">
+                </button>
+                <button id="cancel_quit_game_btn" onclick="closeQuitGame()">
+                    <img src="Assets/img/icons/quit.png">
+                </button>
+            </div>
+
+        </div>
+
+        <button id="start_game_btn" class="" onclick="startGame()"> Start game </button>
+        <button id="new_game_btn" class="d-none" onclick="restartGame()"> New game </button>
+        <button id="home_btn" class="d-none" onclick="showStartScreen()"> Go home</button>
+        <div id="upper_frame" class="">
+            <button id="pause_btn" class="d-none" onclick="pauseGame()">
+                <img id="pause_icon" src="Assets/img/icons/pause.png">
             </button>
-            <button onclick="toggleSoundControls()">
+            <button id="how_to_play_btn" class="" onclick="showHowToPlay()">
+                <img id="how_to_play_btn_img" src="Assets/img/icons/question_mark.png">
+            </button>
+            <button id="story_btn" class="" onclick="showStory()">
+                <img id="story_btn_img" src="Assets/img/icons/book.png">
+            </button>
+            <button id="sound_ctrl_btn" class="d-none" onclick="mute()">
                 <img id="sound_img" src="Assets/img/icons/mute.png">
             </button>
+            <button id="full_screen_btn" class="d-none" onclick="fullScreen()">
+                <img id="full_screen_img" src="Assets/img/icons/full_screen.png">
+            </button>
+            <button id="show_quit_game_btn" class="d-none" onclick="showQuitGame()">
+                <img src="Assets/img/icons/quit.png" alt=""></button>
         </div>
-        <canvas id="canvas" width="720" height="480"></canvas>
+
+        <div id="canvas_container">
+
+            <div id="start_screen" class="">
+                <img id="end_screen" class="d-none" src="Assets/img/9_intro_outro_screens/start/startscreen_1.png">
+
+
+
+            </div>
+            <canvas id="canvas" class="d-none" width="720" height="480"></canvas>
+        </div>
+
         <div id="lower_frame" class="d-none">
             <div id="lower_left">
-                <button id="left_btn"><img src="Assets/img/icons/left.png" alt=""></button>
-                <button id="right_btn"><img src="Assets/img/icons/right.png" alt=""></button>
+                <button id="left_btn"><img src="Assets/img/icons/left.png"></button>
+                <button id="right_btn"><img src="Assets/img/icons/right.png"></button>
             </div>
             <div id="lower_right">
-                <button id="jump_btn"><img src="Assets/img/icons/up.png" alt=""></button>
-                <button id="throw_btn"><img src="Assets/img/icons/bottle.png " alt=""></button>
+                <button id="jump_btn"><img src="Assets/img/icons/up.png"></button>
+                <button id="throw_btn"><img src="Assets/img/icons/bottle.png "></button>
 
             </div>
         </div>

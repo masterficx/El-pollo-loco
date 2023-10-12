@@ -1,27 +1,60 @@
 class Chicken extends MovableObject {
-        y = 360;
-        height = 65;
-        width =65;
-        IMAGES_WALKING = [
-            'Assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
-            'Assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
-            'Assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png',
-        ];
-        constructor(sP){
-            super().loadImage('Assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
-            this.loadImages(this.IMAGES_WALKING);
-            this.speed = 0.15 + Math.random() * 0.45;
-            this.x = sP + 200 + Math.random() * 500;
-            this.animate();
-        }
+    y = 365;
+    height = 55;
+    width = 55;
+    offset = {
+        top: 5,
+        left: 5,
+        right: 5,
+        bottom: 10,
+    };
+    IMAGES_WALKING = [
+        'Assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
+        'Assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
+        'Assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png',
+    ];
 
-        animate(){
-            setInterval(() => {
+    IMAGES_DEAD = [
+        'Assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
+        'Assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
+    ];
+
+    constructor(sP) {
+        super().loadImage('Assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
+        this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_DEAD);
+        this.speed = 0.25;
+        this.x = sP + Math.random() * 500;
+        this.animate();
+    }
+
+    /**This function starts all intervalls that depending on certain conditions, make the chicken move, or not.
+     * The second intervall decides which animation is to be played, and starts it depending if the chicken is alive or dead. */
+
+    animate() {
+
+        setInterval(() => {
+            if (gameIsPaused) {
+                
+            } else {
                 this.moveLeft();
-            }, 1000 / 60);
+            }
             
-            setInterval(() => {
+        }, 1000 / 200);
+
+        setInterval(() => {
+            if (gameIsPaused) {
+                
+            } else {
+               if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+            } else if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
-            }, 100)
-        }
+            } 
+            }
+            
+
+        }, 100);
+    }
+
 }

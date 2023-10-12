@@ -1,44 +1,56 @@
+@font-face {
+    font-family: "Limited Budget";
+    src: url('Assets/fonts/limited-budget/limitedbudgetDEMO.otf');
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-image: url('Assets/img/desert.png');
     background-repeat: no-repeat;
     background-position: center;
-    height: 100vh;
+    background-size: 100% 100%;
     margin: 0;
+    height: 100vh;
+    width: auto;
 
 }
 
 #frame {
     position: relative;
+    display: flex;
     width: 720px;
     height: 480px;
 }
 
 h1 {
-    margin-top: 100px;
+    margin: 0px 0px 20px 0px;
+    font-family: "Limited Budget";
+    font-size: 64px;
 }
 
 #upper_frame {
     position: absolute;
     top: 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     background-color: rgba(0, 0, 0, 0);
     height: 70px;
-    width: 720px;
-    z-index: 99;
+    width: 100%;
+    z-index: 3;
 }
 
 #touch_control {
     position: relative;
 }
 
-#touch_img{
-    position: absolute;}
+#touch_img {
+    position: absolute;
+}
 
-#touch_disabled_img{
+#touch_disabled_img {
     position: absolute;
     height: 50px !important;
     width: 50px !important;
@@ -52,9 +64,251 @@ h1 {
     justify-content: space-between;
     background-color: rgba(0, 0, 0, 0);
     height: 70px;
-    width: 720px;
-    z-index: 199;
+    width: 100%;
+    z-index: 2;
 }
+
+#start_game_btn {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    height: 50px;
+    width: 150px;
+    border: solid 2.5px rgba(255, 255, 255, 0.53);
+    background-color: rgba(1, 157, 181, 0.53);
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    z-index: 99;
+}
+
+#start_game_btn:hover {
+    background-color: rgba(12, 50, 56, 0.726);
+    border: solid 3px rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px rgb(153, 153, 153);
+    cursor: pointer;
+    scale: 1.03;
+}
+
+#home_btn{
+    position: absolute;
+    top: 80px;
+    left: calc(50% - 75px);
+    right: calc(50% - 75px);
+    height: 50px;
+    width: 150px;
+    border: solid 2.5px rgba(255, 255, 255, 0.53);
+    background-color: rgba(1, 157, 181, 0.53);
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    z-index: 5;
+}
+
+#home_btn:hover {
+    background-color: rgba(12, 50, 56, 0.726);
+    border: solid 3px rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px rgb(153, 153, 153);
+    cursor: pointer;
+    scale: 1.03;
+}
+
+#how_to_play {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 80%;
+    height: 60%;
+    z-index: 4;
+    top: 23%;
+    left: 10%;
+    
+}
+
+#how_to_play h2 {
+    margin: 0px;
+}
+
+#story_div{
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 80%;
+    height: 70%;
+    z-index: 4;
+    top: 15%;
+    left: 10%;
+    padding: 0px 5px 0px 5px;
+    font-size: 17px;
+    color: white;
+    border: solid 3px rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px rgb(153, 153, 153);
+    border-radius: 10px;
+    background-color: rgba(0, 115, 133, 0.95);
+    text-align: center;
+    
+}
+
+#how_to_movement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    border: solid 3px rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px rgb(153, 153, 153);
+    padding: 0px 20px 0px 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 115, 131, 0.95);
+}
+
+#how_to_movement p {
+    margin: 5px;
+}
+
+#directions{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+}
+
+
+#directions_left p{
+    text-align: start;
+}
+
+#directions_right p{
+    text-align: end;
+}
+
+#how_to_description{
+    font-size: 20px;
+    color: white;
+    border: solid 3px rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px rgb(153, 153, 153);
+    padding: 10px 10px 10px 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 115, 131, 0.95);
+    text-align: center;
+}
+
+#quit_game_div{
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 40%;
+    height: 46%;
+    z-index: 4;
+    top: 25%;
+    left: 30%;
+    padding: 0px 5px 0px 5px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    border: solid 3px rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px rgb(153, 153, 153);
+    border-radius: 10px;
+    background-color: rgba(0, 115, 133, 0.95);
+    text-align: center;
+}
+
+#quit_game_btns{
+    display: flex;
+    box-sizing: border-box;
+}
+
+#quit_game_div button{
+    background-color: rgba(1, 157, 181, 0.53);
+    border-radius: 10px;
+    border: solid 2.5px rgba(255, 255, 255, 0.53);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+}
+
+#quit_game_div button:hover{
+    background-color: rgba(12, 50, 56, 0.726);
+    border: solid 3px rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px rgb(153, 153, 153);
+    cursor: pointer;
+    /* background-color: rgba(1, 157, 181, 0.726); */
+    /* border: solid 2.5px rgb(255, 255, 255); */
+    scale: 1.05;
+}
+
+#quit_game_btns img{
+    height: 40px;
+    width: 40px;
+}
+
+#new_game_btn {
+    position: absolute;
+    top: 20px;
+    left: calc(50% - 75px);
+    right: calc(50% - 75px);
+    height: 50px;
+    width: 150px;
+    border: solid 2.5px rgba(255, 255, 255, 0.53);
+    background-color: rgba(1, 157, 181, 0.53);
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    z-index: 5;
+}
+
+#new_game_btn:hover {
+    background-color: rgba(12, 50, 56, 0.726);
+    border: solid 3px rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px rgb(153, 153, 153);
+    cursor: pointer;
+    scale: 1.03;
+}
+
+#start_screen {
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-image: url('Assets/img/9_intro_outro_screens/start/startscreen_1.png');
+    /* background-image: url('Assets/img/5_background/first_half_background.png'); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+
+}
+
+#end_screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+
+#you_lost {
+    height: 100%;
+    width: 100%;
+}
+
 
 #lower_frame button {
     background-color: rgba(1, 157, 181, 0.53);
@@ -77,12 +331,26 @@ h1 {
     justify-content: center;
     height: 50px;
     width: 50px;
-    margin: 10px 10px 10px 10px;
+    margin: 15px 15px 0px 0px;
+
 }
 
-#upper_frame img{
+#upper_frame button:hover {
+
+    background-color: rgba(12, 50, 56, 0.726);
+    border: solid 3px rgb(255, 255, 255);
+    box-shadow: 3px 3px 5px rgb(153, 153, 153);
+    cursor: pointer;
+    /* background-color: rgba(1, 157, 181, 0.726); */
+    /* border: solid 2.5px rgb(255, 255, 255); */
+    scale: 1.05;
+
+}
+
+#upper_frame img {
     height: 40px;
     width: 40px;
+
 }
 
 #lower_frame img {
@@ -108,4 +376,68 @@ h1 {
 
 .d-none {
     display: none !important;
+}
+
+#canvas_container{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#rotate_device{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+#rotate_device p{
+    font-family: "Limited Budget";
+}
+
+#rotate_device img{
+    height: 40%;
+}
+
+@media (max-width: 900px){
+    #title{ 
+        display: none;
+    }
+    
+}
+
+@media (max-width: 720px){
+    #frame{
+        height: auto;
+        width: 100vw;
+        aspect-ratio: 720 / 480;
+    }
+
+    #canvas{
+        height: auto;
+        width: 100vw;
+        aspect-ratio: 720 / 480;
+        
+    }
+}
+
+@media (max-height: 480px){
+    #frame{
+        height: 100vh;
+        width: auto;
+        aspect-ratio: 720 / 480;
+    }
+
+    #canvas{
+        height: 100vh;
+        width: auto;
+        aspect-ratio: 720 / 480;
+        
+    }
 }

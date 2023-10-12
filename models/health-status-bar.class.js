@@ -17,17 +17,20 @@ class HealthStatusBar extends DrawableObject {
         this.setPercentage(100);
     }
 
-    //setPercentage(50);
+    /**This function sets the percentage in the status bar, and with that displaying the correct status bar image. */
     setPercentage(percentage){
         this.percentage = percentage;  // => 0 ... 5
         let path = this.IMAGES[this.resolveImageIndex()];
         this.x = 20;
-        this.y = 36;
-        this.width = 160;
-        this.height = 40;
+        this.y = 10;
+        this.width = 170;
+        this.height = 50;
         this.img = this.imageCache[path];
 
     }
+
+    /**This function decides which number it returns depending on the percentage/energy. 
+     * The number is being used in the setPercentage() function as the array id for the correct image that is to be displayed. */
 
     resolveImageIndex(){
         if(this.percentage == 100){

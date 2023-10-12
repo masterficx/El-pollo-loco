@@ -14,35 +14,39 @@ class CoinStatusBar extends DrawableObject {
     constructor(){
         super();
         this.loadImages(this.IMAGES);
-        this.setPercentage(100);
+        this.setPercentage(0);
     }
 
-    //setPercentage(50);
+    /**This function sets the percentage in the status bar, and with that displaying the correct status bar image. */
     setPercentage(percentage){
         this.percentage = percentage;  // => 0 ... 5
         let path = this.IMAGES[this.resolveImageIndex()];
         this.x = 20;
-        this.y = 65;
-        this.width = 160;
-        this.height = 40;
+        this.y = 90;
+        this.width = 170;
+        this.height = 50;
         this.img = this.imageCache[path];
 
     }
 
+    /**This function decides which number it returns depending on the percentage/energy. 
+     * The number is being used in the setPercentage() function as the array id for the correct image that is to be displayed. */
+
     resolveImageIndex(){
-        if(this.percentage == 100){
+        if(this.percentage >  5){
             return 5;
-        } else if(this.percentage > 80){
+        } else if(this.percentage == 4){
             return 4;
-        } else if(this.percentage > 60){
+        } else if(this.percentage == 3){
             return 3;
-        } else if(this.percentage > 40){
+        } else if(this.percentage == 2){
             return 2;
-        } else if(this.percentage > 20){
+        } else if(this.percentage == 1){
             return 1;
-        } else {
+        } else if(this.percentage == 0){
             return 0;
+        } else { 
+            return 5;
         }
     }
-
 }
