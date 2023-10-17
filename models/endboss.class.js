@@ -3,6 +3,9 @@ class Endboss extends MovableObject {
     width = 250;
     y = 50;
     charIsHere = false;
+    turnAround = false;
+    endbos_end_x = 3900;
+    speed = 5
     offset = {
         top: 135,
         left: 40,
@@ -28,6 +31,12 @@ class Endboss extends MovableObject {
         'Assets/img/4_enemie_boss_chicken/3_attack/G20.png'
     ];
 
+    IMAGES_HURT = [
+        'Assets/img/4_enemie_boss_chicken/4_hurt/G21.png',
+        'Assets/img/4_enemie_boss_chicken/4_hurt/G22.png',
+        'Assets/img/4_enemie_boss_chicken/4_hurt/G23.png'
+    ];
+
     IMAGES_DEAD = [
         'Assets/img/4_enemie_boss_chicken/5_dead/G24.png',
         'Assets/img/4_enemie_boss_chicken/5_dead/G25.png',
@@ -39,30 +48,60 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ATACKING);
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_HURT);
         this.x = 3000;
         this.animate();
+        this.turnBossAround();
+        this.moveBoss();
     }
 
     /**This function decides which animation is to be played depending on certain conditions. */
-
     animate() {
-
         setInterval(() => {
-            if (gameIsPaused) {
-
-            } else {
-                if (this.isDead()) {
+            if (!gameIsPaused) {
+                if (this.isHurt()) {
+                    this.playAnimation(this.IMAGES_HURT);
+                } else if (this.isDead()) {
                     this.playAnimation(this.IMAGES_DEAD);
-                } else {
-                    if (!this.charIsHere) {
-                        this.playAnimation(this.IMAGES_WALKING);
-                    } else if (this.charIsHere) {
-                        this.playAnimation(this.IMAGES_ATACKING);
-                    }
-
-
+                } else if (this.energy <= 40) {
+                    this.playAnimation(this.IMAGES_ATACKING);
+                    this.speed = 10;
+                } else if (this.charIsHere) {
+                    this.playAnimation(this.IMAGES_WALKING);
                 }
             }
         }, 100)
+    }
+
+    /**This function moves the end boss depending on a certain conditions. */
+    moveBoss() {
+        setInterval(() => {
+            if (!gameIsPaused && this.charIsHere && !this.isDead() && !this.isHurt()) {
+                if (this.turnAround) {
+                    this.moveLeft();
+                    this.otherDirection = false;
+                }
+                if (this.canMoveRight()) {
+                    this.moveRight();
+                    this.otherDirection = true;
+                }
+            }
+        }, 20);
+    }
+    /**This is a small help function to make the code shorter and cleaner. It just checks a certain condition and returns true or false if the conditions are met. */
+    canMoveRight() {
+        return world.endBoss.x + world.endBoss.width < world.endBoss.endbos_end_x && !world.endBoss.turnAround;
+    }
+
+    /**This function toggles every three seconds between the true and false state of the turnAround variable in order to switch the movement direction of the end boss.  */
+    turnBossAround() {
+        setInterval(() => {
+            if (this.turnAround) {
+                this.turnAround = false;
+            }
+            else {
+                this.turnAround = true;
+            }
+        }, 3000);
     }
 }

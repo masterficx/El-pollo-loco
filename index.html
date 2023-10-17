@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El pollo loco</title>
+    <link rel="icon" type="image/x-icon" href="Assets/img/icons/favicon.png">
     <link rel="stylesheet" href="style.css">
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
@@ -26,7 +27,7 @@
     <script src="models/throwable-object.class.js"></script>
     <script src="models/endboss.class.js"></script>
     <script src="levels/level1.js"></script>
-    <script src="JS/screen-orientation.js"></script>
+    <script src="JS/screen-handling.js"></script>
     <script src="JS/game.js"></script>
     
 
@@ -89,7 +90,7 @@
             </p>
         </div>
         <div class="d-none" id="quit_game_div">
-            <h2>Quit Game ?</h2>
+            <h2>Quit game ?</h2>
             <div id="quit_game_btns">
                 <button id="quit_game_btn" onclick="quitGame()">
                     <img src="Assets/img/icons/checked_checkbox.png">
@@ -117,7 +118,7 @@
             <button id="sound_ctrl_btn" class="d-none" onclick="mute()">
                 <img id="sound_img" src="Assets/img/icons/mute.png">
             </button>
-            <button id="full_screen_btn" class="d-none" onclick="fullScreen()">
+            <button id="full_screen_btn" class="" onclick="fullScreen()">
                 <img id="full_screen_img" src="Assets/img/icons/full_screen.png">
             </button>
             <button id="show_quit_game_btn" class="d-none" onclick="showQuitGame()">
@@ -149,7 +150,7 @@
     </div>
 
 
-    </canvas>
+    
 </body>
 
 </html>

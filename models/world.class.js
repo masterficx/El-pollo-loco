@@ -20,64 +20,49 @@ class World {
     collectedCoins = 0;
     endBoss = this.level.enemies[this.level.enemies.length - 1];
 
+    /**This is the interval that plays another instance from the background music as soon it ends. */
+    oneMilisecondInterval = this.playBgMusic = setInterval(() => {
+        this.backgroundMusic.play()
+    }, 1);
+
+    /**This is the interval that checks if the character succesfully stepped on the chicken or the chicks head. */
+    twentyMilisecondsInterval = setInterval(() => {
+        if (!gameIsPaused) {
+            this.killChicken();
+            this.collectBottles();
+            this.collectCoins();
+        }
+    }, 20);
+
+    /**This is the interval that checks the bigger part of the game logic. Every function inside is practically explained by its name. */
+    fiftyMilisecondsInterval = setInterval(() => {
+        if (!gameIsPaused) {
+            this.charReachedEndBoss();
+            this.bottleHitsEnemy();
+            this.isGameOver(); this.checkThrowObjects();
+        }
+    }, 50);
+
+    /**This is the interval that checks if the character can throw bottles if certain criteria is met. */
+    hundredMilisecondsInterval = setInterval(() => {
+        if (!gameIsPaused) {
+            this.charIsHit();
+        }
+    }, 100);
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-
         this.draw();
         this.setWorld();
-        this.run();
-
     }
 
     setWorld() {
         this.character.world = this;
     }
 
-    /**This is the main function that starts all intervalls that handle the logic in the game, and plays the background music also. */
-
-    run() {
-        this.playBgMusic = setInterval(() => {
-            this.backgroundMusic.play()
-        }, 1);
-
-        setInterval(() => {
-
-            if (this.gameIsPaused == true) {
-
-            } else {
-                this.killChicken()
-            };
-        }, 20);
-
-        setInterval(() => {
-            if (this.gameIsPaused == true) {
-
-            } else {
-                this.collectBottles();
-                this.collectCoins();
-                this.charReachedEndBoss();
-                this.bottleHitsEnemy();
-                this.checkThrowObjects();
-                this.isGameOver();
-            }
-
-        }, 50);
-
-        setInterval(() => {
-            if (this.gameIsPaused == true) {
-
-            } else {
-                this.charIsHit();
-            }
-
-        }, 100);
-    }
-
     /** This function handles the creation of the Throwable object class, when certain criterias are met. */
-
     checkThrowObjects() {
         if (this.keyboard.D && this.hasBottles()) {
             if (this.character.otherDirection) {
@@ -89,7 +74,6 @@ class World {
     }
 
     /**This function checks the energy of the main player or the main boss and with that decides if the game has ended. */
-
     isGameOver() {
         if (this.endBoss.energy == 0 || this.character.energy == 0) {
             if (this.endBoss.energy == 0) {
@@ -97,13 +81,10 @@ class World {
             } else {
                 endGame('lost');
             }
-        } else {
-
         }
     }
 
     /**This is a smaller help function that creates an instance of the Throwable object class that is to be displayed/thrown to the left of the main player. */
-
     throwableObjectLeft() {
         let bottle = new ThrowableObject(this.character.x, this.character.y + 70, 'left');
         this.throwableObjects.push(bottle);
@@ -112,7 +93,6 @@ class World {
     }
 
     /**This is a smaller help function that creates an instance of the Throwable object class that is to be displayed/thrown to the right of the main player. */
-
     throwableObjectRight() {
         let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 70, 'right');
         this.throwableObjects.push(bottle);
@@ -121,7 +101,6 @@ class World {
     }
 
     /**This is the function that checks if the main player was hurt from an enemy. */
-
     charIsHit() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
@@ -132,21 +111,19 @@ class World {
     }
 
     /** This function checks if there was a collision with a throwable object and one of the enemies. It basically checks if the main player managed to hit the enemy. */
-
     bottleHitsEnemy() {
-
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy, j) => {
                 if (bottle.isColliding(enemy)) {
                     bottle.playSplashAnimation = true;
                     this.reduceEnemyEnergy(enemy, j, bottle);
+                    enemy.hit();
                 }
             });
         });
     }
 
     /**This function decides who gets to habe his energy reduced, depending on that if it is a smaller enemy or the main boss. */
-
     reduceEnemyEnergy(enemy, indexOfChicken, bottle) {
         if (enemy == this.endBoss) {
             this.reduceEndbossHP(enemy, indexOfChicken, bottle);
@@ -154,12 +131,9 @@ class World {
             this.chickenIsDead(enemy, indexOfChicken, bottle);
             indexOfChicken = indexOfChicken - 1;
         }
-
-
     }
 
     /**This function handles the removal of the smaller enemy after it has been hit with a bottle. */
-
     chickenIsDead(enemy, indexOfChicken, bottle) {
         enemy.energy = 0;
         enemy.speed = 0;
@@ -170,7 +144,6 @@ class World {
     }
 
     /**This function reduces the energy of the main boss by a certain procent after being hit by a bottle.  */
-
     reduceEndbossHP(bottle) {
         this.endBoss.energy -= 20;
         this.endBossHitAudio.play();
@@ -181,7 +154,6 @@ class World {
     }
 
     /**This function checks if the main player reached the point where the final battle with the main boss is to start. */
-
     charReachedEndBoss() {
         if (this.character.x > 2700) {
             this.endBoss.charIsHere = true;
@@ -189,13 +161,12 @@ class World {
     }
 
     /**This function handles the removal of a smaller enemy from the world after being stepped on by the main player. */
-
     killChicken() {
         this.level.enemies.forEach((enemy, i) => {
             if (enemy.dead) {
                 this.level.enemies.splice(i, 1)
             }
-            if (this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.energy == 0) {
+            if (this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.energy == 0 && this.character.isFalling()) {
                 if (enemy == this.endBoss) {
                 } else {
                     this.character.smallJump();
@@ -212,7 +183,6 @@ class World {
     }
 
     /**This function checks for collision between the main player and the bottles on the ground and increases the ammount of the collected bottles. */
-
     collectBottles() {
         this.level.bottles.forEach((bottle, i) => {
             if (this.character.isColliding(bottle)) {
@@ -225,8 +195,6 @@ class World {
     }
 
     /**This function checks for collision between the main player and the coins in the world and increases the ammount of the collected coins. */
-
-
     collectCoins() {
         this.level.coins.forEach((coin, i) => {
             if (this.character.isColliding(coin)) {
@@ -239,13 +207,11 @@ class World {
     }
 
     /**This is a help function that checks if the main player has bottles at all. */
-
     hasBottles() {
         return this.collectedBottles > 0;
     }
 
     /**This is the draw function that draws all of the movable and static objects on the canvas as well as the background objects. */
-
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -265,7 +231,6 @@ class World {
     }
 
     /**This is a small function that adds the movable objects to the canvas */
-
     addAllMovableObjectsToMap() {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
@@ -273,21 +238,18 @@ class World {
     }
 
     /**This is a small function that adds the bottles and coins to the canvas */
-
     addBottlesAndCoinsToMap() {
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
     }
 
     /**This is a small function that adds the background objects to the canvas */
-
     addAllBackgroundObjectsToMap() {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
     }
 
     /**This is a small function that adds the status bars to the canvas */
-
     addAllStatusBarsToMap() {
         this.addToMap(this.statusBar);
         this.addToMap(this.bottleStatusBar);
@@ -296,7 +258,6 @@ class World {
     }
 
     /**This is a small function that adds the main boss health status bar to the canvas */
-    
     addEndBossStatusBar() {
         if (this.endBoss.charIsHere) {
             this.addToMap(this.endbossStatusBar);
@@ -305,7 +266,6 @@ class World {
     }
 
     /**This is a small help function that adds the the static objects to the canvas */
-
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
@@ -313,7 +273,6 @@ class World {
     }
 
     /**This is a small help function that adds the movable to the canvas in the corresponding direction*/
-
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
@@ -326,7 +285,6 @@ class World {
     }
 
     /**This is a small help function that flips the image in the other direction. */
-
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -335,7 +293,6 @@ class World {
     }
 
     /**This is a small help function that flips the image back in the other direction. */
-
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();

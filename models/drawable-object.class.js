@@ -15,20 +15,9 @@ class DrawableObject {
     }
 
     /**This function draws an image on certain coordinates on the canvas */
-
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     };
-
-    drawOffsetFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.offset.x, this.offset.y, this.offset.width, this.offset.height);
-            ctx.stroke();
-        }
-    }
 
     /**
      * This function creates an new instance of the class Image for each object in the array that has been given to the function as a parameter. It is later stored as an image cache in the array.

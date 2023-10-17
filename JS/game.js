@@ -8,44 +8,37 @@ let gameStarted = false;
 let gameIsPaused = false;
 
 /**This is a small help function to make the code shorter and cleaner. It sets/changes attributes to certain elements. */
-
 function changeAttribute(id, name, content) {
     document.getElementById(id).setAttribute(name, content);
 }
 
 /**This is a small help function to make the code shorter and cleaner. It adds classes to certain elements. */
-
 function addClasslist(id, theClass) {
     document.getElementById(id).classList.add(theClass);
 }
 
 /**This is a small help function to make the code shorter and cleaner. It removes classes from certain elements. */
-
 function removeClasslist(id, theClass) {
     document.getElementById(id).classList.remove(theClass);
 }
 
 /**This is a small help function to make the code shorter and cleaner. It enables a certain button. */
-
 function enableButton(id) {
     document.getElementById(id).disabled = false;
 }
 
 /**This is a small help function to make the code shorter and cleaner. It disables a certain button. */
-
 function disableButton(id) {
     document.getElementById(id).disabled = true;
 }
 
 /**This is a small help function to make the code shorter and cleaner. It changes the background image url of a certain element. */
-
 function changeBgImage(id, url){
     document.getElementById(id).style.backgroundImage = "";
     document.getElementById(id).style.backgroundImage = url;
 }
 
 /**This is a function that is called to start the game. */
-
 function startGame() {
     closeHowToPlay();
     closeStory();
@@ -59,7 +52,6 @@ function startGame() {
 }
 
 /**This is a function that is called when the game is to be started again. */
-
 function restartGame() {
     gameStarted = true;
     addClasslist('start_screen', 'd-none');
@@ -73,7 +65,6 @@ function restartGame() {
 }
 
 /**This is a function that is called when the game ends due to win or loss. */
-
 function endGame(x) {
     setTimeout(() => {
         clearAllIntervals();
@@ -87,7 +78,6 @@ function endGame(x) {
 }
 
 /**This is a function that is called after the game ends and it shows the winner or loser screen depending on the outcome. */
-
 function displayEndScreen(x) {
     if (x == 'won') {
         displayYouWonScreen();
@@ -97,16 +87,15 @@ function displayEndScreen(x) {
 }
 
 /**This is a small help function to make the code cleaner. It removes the buttons on the start screen and displays the in-game button. */
-
 function handleBtnsOnGameStart() {
     addClasslist('start_game_btn', 'd-none');
+    addClasslist('full_screen_btn', 'd-none');
     addClasslist('story_btn', 'd-none');
     addClasslist('how_to_play_btn', 'd-none');
     removeClasslist('pause_btn', 'd-none');
 }
 
 /**This is a function that is called to stop the winn/lose music after game end when a new game is immediately to be started.  */
-
 function pauseEndGameMusic() {
     world.youLostMusic.pause();
     world.youLostMusic.currentTime = 0;
@@ -115,7 +104,6 @@ function pauseEndGameMusic() {
 }
 
 /** This is a function that is called in order to pause the game. */
-
 function pauseGame() {
     gameIsPaused = true;
     showPausedGameBtns();
@@ -124,7 +112,6 @@ function pauseGame() {
 }
 
 /** This is a function that is called in order to resume the game. */
-
 function resumeGame() {
     gameIsPaused = false;
     closeHowToPlay();
@@ -133,28 +120,7 @@ function resumeGame() {
     changeAttribute('pause_icon', 'src', 'Assets/img/icons/pause.png');
 }
 
-/**This is a function that displays the game in fullscreen. */
-
-function fullScreen() {
-    let element = document.getElementById('canvas');
-    enterFullscreen(element);
-    resumeGame();
-}
-
-/**This is a help function that handles the display of the desired element in fullscreen mode for different browser types. */
-
-function enterFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-        element.msRequestFullscreen();
-    } else if (element.webkitRequestFullscreen) {  // iOS Safari
-        element.webkitRequestFullscreen();
-    }
-}
-
 /**This is a small help function that makes the code cleaner. It displays the menu buttons when the game is paused. */
-
 function showPausedGameBtns() {
     removeClasslist('how_to_play_btn', 'd-none');
     removeClasslist('sound_ctrl_btn', 'd-none');
@@ -163,7 +129,6 @@ function showPausedGameBtns() {
 }
 
 /**This is a small help function that makes the code cleaner. It removes the menu buttons from when the game was paused. */
-
 function closePausedGameBtns() {
     addClasslist('how_to_play_btn', 'd-none');
     addClasslist('sound_ctrl_btn', 'd-none');
@@ -172,28 +137,28 @@ function closePausedGameBtns() {
 }
 
 /**This is a small help function that makes the code cleaner. It shows the container in which is explained how the game is to be played. */
-
 function showHowToPlay() {
     disableButton('story_btn');
     disableButton('show_quit_game_btn');
+    addClasslist('story_btn', 'no_hover');
+    addClasslist('show_quit_game_btn', 'no_hover');
     changeAttribute('how_to_play_btn_img', 'src', 'Assets/img/icons/return.png');
     changeAttribute('how_to_play_btn', 'onclick', 'closeHowToPlay()');
     removeClasslist('how_to_play', 'd-none');
 }
 
 /**This is a small help function that makes the code cleaner. It removes the container in which was explained how the game is to be played. */
-
-
 function closeHowToPlay() {
     enableButton('story_btn');
     enableButton('show_quit_game_btn');
+    removeClasslist('story_btn', 'no_hover');
+    removeClasslist('show_quit_game_btn', 'no_hover');
     changeAttribute('how_to_play_btn_img', 'src', 'Assets/img/icons/question_mark.png');
     changeAttribute('how_to_play_btn', 'onclick', 'showHowToPlay()');
     addClasslist('how_to_play', 'd-none');
 }
 
 /**This is a small help function that makes the code cleaner. It shows the container in which is displayed the choice to end the game or not. */
-
 function showQuitGame(){
     removeClasslist('quit_game_div', 'd-none');
     closePausedGameBtns();
@@ -201,7 +166,6 @@ function showQuitGame(){
 }
 
 /**This is a small help function that makes the code cleaner. It removes the container in which wass displayed the choice to end the game or not. */
-
 function closeQuitGame(){
     addClasslist('quit_game_div', 'd-none');
     showPausedGameBtns();
@@ -209,21 +173,19 @@ function closeQuitGame(){
 }
 
 /**This is the function that handles the complete ending of the game. */
-
 function quitGame(){
     clearAllIntervals();
     addClasslist('canvas', 'd-none');
     addClasslist('quit_game_div', 'd-none');
+    removeClasslist('full_screen_btn', 'd-none');
     gameIsPaused = false;
     changeAttribute('pause_btn', 'onclick', 'pauseGame()');
     changeAttribute('pause_icon', 'src', 'Assets/img/icons/pause.png');
     showStartScreen();
-    world.backgroundMusic.pause();
-    world.backgroundMusic.currentTime = 0;
+    pauseBackgroundMusic();
 }
 
 /**This is a function that displays the start screen after a game was ended. */
-
 function showStartScreen(){
     addClasslist('end_screen', 'd-none');
     changeBgImage('start_screen', 'Assets/img/9_intro_outro_screens/start/startscreen_1.png');
@@ -233,29 +195,30 @@ function showStartScreen(){
     removeClasslist('start_game_btn', 'd-none');
     removeClasslist('how_to_play_btn', 'd-none');
     removeClasslist('story_btn', 'd-none');
+    removeClasslist('full_screen_btn', 'd-none');
+    world.youLostMusic.pause();
+    world.youWonMusic.pause();
 }
 
 /**This is a small help function that makes the code cleaner. It shows the container in which the background story of the game is told. */
-
-
 function showStory() {
     disableButton('how_to_play_btn');
+    addClasslist('how_to_play_btn', 'no_hover');
     changeAttribute('story_btn_img', 'src', 'Assets/img/icons/return.png');
     changeAttribute('story_btn', 'onclick', 'closeStory()');
     removeClasslist('story_div', 'd-none');
 }
 
-/**This is a small help function that makes the code cleaner. Itcloses the container in which the background story of the game was shown. */
-
+/**This is a small help function that makes the code cleaner. It closes the container in which the background story of the game was shown. */
 function closeStory() {
     enableButton('how_to_play_btn');
+    removeClasslist('how_to_play_btn', 'no_hover');
     changeAttribute('story_btn_img', 'src', 'Assets/img/icons/book.png');
     changeAttribute('story_btn', 'onclick', 'showStory()');
     addClasslist('story_div', 'd-none');
 }
 
 /**This is a function that decides if the winn or lose song is to be played. */
-
 function playEndGameMusic(x) {
     if (x == 'won') {
         world.youWonMusic.play();
@@ -265,7 +228,6 @@ function playEndGameMusic(x) {
 }
 
 /**This is a small help function that makes the code cleaner. It handles the displaying of the winner screen */
-
 function displayYouWonScreen() {
     document.getElementById('start_screen').style.backgroundImage = "";
     document.getElementById('start_screen').style.backgroundImage = "url('Assets/img/5_background/first_half_background.png')";
@@ -278,7 +240,6 @@ function displayYouWonScreen() {
 }
 
 /**This is a small help function that makes the code cleaner. It handles the displaying of the loser screen */
-
 function displayYouLostScreen() {
     document.getElementById('start_screen').style.backgroundImage = "";
     document.getElementById('start_screen').style.backgroundImage = "url('Assets/img/5_background/first_half_background.png')";
@@ -291,7 +252,6 @@ function displayYouLostScreen() {
 }
 
 /**This is the function that pauses/mutes the background music. */
-
 function pauseBackgroundMusic() {
     clearInterval(world.playBgMusic);
     world.backgroundMusic.pause();
@@ -299,7 +259,6 @@ function pauseBackgroundMusic() {
 
 /**This is function that handles the initialisation of the world. It basically inserts all other needed classes through the class World.
   Through the class world the entire game logic is started as well. */
-
 function initWorld() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
@@ -307,13 +266,11 @@ function initWorld() {
 }
 
 /**This function stops all intervals. */
-
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
 /**This function is called when the mute button is pressed. It stops the background music. */
-
 function mute() {
     clearInterval(world.playBgMusic);
     world.backgroundMusic.pause();
@@ -322,7 +279,6 @@ function mute() {
 }
 
 /**This function is called when the unmute button is pressed. It resumes the background music playback */
-
 function unmute() {
     world.backgroundMusic.play();
     document.getElementById('sound_img').src = 'Assets/img/icons/mute.png';
@@ -330,7 +286,6 @@ function unmute() {
 }
 
 /**This function handles the keypresses and changes the corresponding variable as long a certaing key is pressed. */
-
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
@@ -353,7 +308,6 @@ window.addEventListener('keydown', (e) => {
 });
 
 /**This function handles the keypresses and changes the corresponding variable when a certaing key is released. */
-
 window.addEventListener('keyup', (e) => {
     if (e.keyCode == 32) {
         keyboard.SPACE = false;
@@ -376,7 +330,6 @@ window.addEventListener('keyup', (e) => {
 });
 
 /**This function handles the touch buttons. It changes the corresponding variable when a certain button is pressed or released.*/
-
 function touchCtrlButtons() {
     document.getElementById('left_btn').addEventListener('touchstart', (e) => {
         e.preventDefault();

@@ -31,6 +31,11 @@ h1 {
     font-size: 64px;
 }
 
+h2 {
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
 #upper_frame {
     position: absolute;
     top: 0;
@@ -209,11 +214,11 @@ h1 {
     align-items: center;
     justify-content: center;
     position: absolute;
-    width: 40%;
-    height: 46%;
+    width: 22%;
+    height: 26%;
     z-index: 4;
-    top: 25%;
-    left: 30%;
+    top: 37%;
+    left: 39%;
     padding: 0px 5px 0px 5px;
     font-size: 22px;
     font-weight: bold;
@@ -223,6 +228,10 @@ h1 {
     border-radius: 10px;
     background-color: rgba(0, 115, 133, 0.95);
     text-align: center;
+}
+
+#quit_game_div h2{
+    margin: 0px 0px 15px 0px;
 }
 
 #quit_game_btns{
@@ -239,7 +248,7 @@ h1 {
     justify-content: center;
     height: 50px;
     width: 50px;
-    margin: 10px;
+    margin: 5px 10px 5px 10px;
 }
 
 #quit_game_div button:hover{
@@ -347,6 +356,27 @@ h1 {
 
 }
 
+.no_hover {
+    background-color: rgba(1, 157, 181, 0.53);
+    border-radius: 10px;
+    border: solid 2.5px rgba(255, 255, 255, 0.53);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    margin: 10px 20px 10px 20px;
+
+}
+
+.no_hover:hover{
+    background-color: rgba(1, 157, 181, 0.53) !important;
+    border: solid 2.5px rgba(255, 255, 255, 0.53) !important;
+    box-shadow: none !important;
+    scale: 1 !important;
+    cursor: default !important;
+}
+
 #upper_frame img {
     height: 40px;
     width: 40px;
@@ -372,6 +402,8 @@ h1 {
     position: relative;
     top: 0;
     z-index: 1;
+    height: 100%;
+    width: 100%;
 }
 
 .d-none {
@@ -436,7 +468,7 @@ h1 {
 
     #canvas{
         height: 100vh;
-        width: auto;
+        width: 100%;
         aspect-ratio: 720 / 480;
         
     }

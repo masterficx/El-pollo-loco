@@ -31,7 +31,6 @@ class CoinStatusBar extends DrawableObject {
 
     /**This function decides which number it returns depending on the percentage/energy. 
      * The number is being used in the setPercentage() function as the array id for the correct image that is to be displayed. */
-
     resolveImageIndex(){
         if(this.percentage >  5){
             return 5;

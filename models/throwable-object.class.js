@@ -38,7 +38,6 @@ class ThrowableObject extends MovableObject {
     }
 
     /**This function handles the movement and direction of the object that was to be thrown */
-
     throw(characterDirection) {
         this.speedY = 30;
         this.applyGravity();
@@ -48,7 +47,6 @@ class ThrowableObject extends MovableObject {
     }
 
     /**This function handles the animation of the throwable object. */
-
     animate() {
         setInterval(() => {
             if(this.playSplashAnimation){
@@ -60,7 +58,6 @@ class ThrowableObject extends MovableObject {
     }
 
     /**This function decides in which direction is the object to be thrown depending of the direction of the character. */
-
     throwLeftOrRight(characterDirection) {
         if (characterDirection == 'right') {
             this.throwRight();
@@ -71,13 +68,11 @@ class ThrowableObject extends MovableObject {
     }
 
     /**This function throws the object to the right of the main character. */
-
     throwRight() {
         this.x += 10;
     }
 
     /**This function throws the object to the leftt of the main character. */
-
     throwLeft() {
         this.x -= 10;
     }

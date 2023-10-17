@@ -30,31 +30,20 @@ class Chicken extends MovableObject {
 
     /**This function starts all intervalls that depending on certain conditions, make the chicken move, or not.
      * The second intervall decides which animation is to be played, and starts it depending if the chicken is alive or dead. */
-
     animate() {
-
         setInterval(() => {
-            if (gameIsPaused) {
-                
-            } else {
+            if (!gameIsPaused) {
                 this.moveLeft();
             }
-            
         }, 1000 / 200);
-
         setInterval(() => {
-            if (gameIsPaused) {
-                
-            } else {
-               if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-            } else if (!this.isDead()) {
-                this.playAnimation(this.IMAGES_WALKING);
+            if (!gameIsPaused) {
+                if (this.isDead()) {
+                    this.playAnimation(this.IMAGES_DEAD);
+                } else if (!this.isDead()) {
+                    this.playAnimation(this.IMAGES_WALKING);
+                }
             } 
-            }
-            
-
         }, 100);
     }
-
 }
